@@ -1,7 +1,7 @@
 # Unity-URP-PBR
 
  PBR Shader for Unity.
- 
+
 ## SimpleLit (SimpleLit Scene)
 URP PBR vs Custom PBR
 
@@ -20,7 +20,7 @@ For more information, please visit -> https://tajourney.games/6112/
 #### IBL
 SpecularOcclusion Off:
 <div align=center><img src="https://user-images.githubusercontent.com/89976115/221413278-d2c17cf5-e5c1-42a8-b289-8079ec73c555.png" width="50%" alt="Homework1"></div>
-SpecularOcclusion ON:
+SpecularOcclusion ON:( GetSpecularOcclusionFromAmbientOcclusio + AOMultiBounce)
 <div align=center><img src="https://user-images.githubusercontent.com/89976115/221413285-4e3a2a34-96be-44eb-973b-bc7c2bbce097.png" width="50%" alt="Homework1"></div>
 
 URP PBR vs Custom PBR
