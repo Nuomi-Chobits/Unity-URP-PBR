@@ -60,8 +60,6 @@ void InitializeCustomSurfaceData(Varyings input,out CustomSurfacedata customSurf
     //normalTS (tangent Space)
     float4 normalTS = SAMPLE_TEXTURE2D(_NormalMap,sampler_NormalMap,input.uv);
     customSurfaceData.normalTS =  UnpackNormalScale(normalTS,_Normal);
-    // float3x3 TBN = float3x3(customLitData.T,customLitData.B,customLitData.N);
-    // normalWS = normalize(mul(normalTS,TBN));
 
     //occlusion
     half occlusion = SAMPLE_TEXTURE2D(_OcclusionMap,sampler_OcclusionMap,input.uv).r;

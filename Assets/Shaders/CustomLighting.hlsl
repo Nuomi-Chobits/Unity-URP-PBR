@@ -2,6 +2,7 @@
 #define CUSTOM_LITGHTING_INCLUDED
 
 #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
+#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/CommonLighting.hlsl"
 
 #define CUSTOM_NAMESPACE_START(namespace) struct _##namespace {
 #define CUSTOM_NAMESPACE_CLOSE(namespace) }; _##namespace namespace;
@@ -80,14 +81,6 @@ CUSTOM_NAMESPACE_START(BxDF)
         return DiffuseColor * (1 / PI);
     }
 
-    float3 AOMultiBounce( float3 BaseColor, float AO )
-    {
-        float3 a =  2.0404 * BaseColor - 0.3324;
-        float3 b = -4.7951 * BaseColor + 0.6417;
-        float3 c =  2.7552 * BaseColor + 0.6903;
-        return max( AO, ( ( AO * a + b ) * AO + c ) * AO );
-    }
-
     half3 EnvBRDFApprox( half3 SpecularColor, half Roughness, half NoV )
     {
         // [ Lazarov 2013, "Getting More Physical in Call of Duty: Black Ops II" ]
@@ -103,11 +96,6 @@ CUSTOM_NAMESPACE_START(BxDF)
         AB.y *= saturate( 50.0 * SpecularColor.g );
 
         return SpecularColor * AB.x + AB.y;
-    }
-
-    float GetSpecularOcclusion(float NoV, float RoughnessSq, float AO)
-    {
-        return saturate( pow( abs(NoV + AO), RoughnessSq ) - 1 + AO );
     }
 
     half3 SimpleBRDF(CustomLitData customLitData,CustomSurfacedata customSurfaceData,half3 L,half3 lightColor,float shadow)
@@ -163,18 +151,15 @@ CUSTOM_NAMESPACE_START(BxDF)
         //Specular GGX
         return  (diffuseTerm + specularTerm) * radiance;
     }
+    
     half3 EnvBRDF(CustomLitData customLitData,CustomSurfacedata customSurfaceData,float envRotation,float3 positionWS)
     {
-        // half3 H = normalize(customLitData.V + L);
-        // half NoH = saturate(dot(customLitData.N,H));
-        // half NoL = saturate(dot(customLitData.N,L));
-        // half VoH = saturate(dot(customLitData.V,H));//LoH
         half NoV = saturate(abs(dot(customLitData.N,customLitData.V)) + 1e-5);//区分正反面
         half3 R = reflect(-customLitData.V,customLitData.N);
         R = Common.RotateDirection(R,envRotation);
 
         //SH
-        float3 diffuseAO = AOMultiBounce(customSurfaceData.albedo,customSurfaceData.occlusion);
+        float3 diffuseAO = GTAOMultiBounce(customSurfaceData.occlusion,customSurfaceData.albedo);
         float3 radianceSH = SampleSH(customLitData.N);
         float3 indirectDiffuseTerm = radianceSH * customSurfaceData.albedo * diffuseAO;
         #if defined(_SH_OFF)
@@ -182,11 +167,14 @@ CUSTOM_NAMESPACE_START(BxDF)
 	    #endif
 
         //IBL
-        //预过滤环境映射（Prefiltered Environment Mapping）
+        //The Split Sum: 1nd Stage
         half3 specularLD = GlossyEnvironmentReflection(R,positionWS,customSurfaceData.roughness,customSurfaceData.occlusion);
+        //The Split Sum: 2nd Stage
         half3 specularDFG = EnvBRDFApprox(customSurfaceData.specular,customSurfaceData.roughness,NoV);
-        float specularOcclusion = GetSpecularOcclusion(NoV,Common.Pow2(customSurfaceData.roughness),customSurfaceData.occlusion);
-        float3 specularAO = AOMultiBounce(customSurfaceData.specular,specularOcclusion);
+        //AO 处理漏光
+        float specularOcclusion = GetSpecularOcclusionFromAmbientOcclusion(NoV,customSurfaceData.occlusion,customSurfaceData.roughness);
+        float3 specularAO = GTAOMultiBounce(specularOcclusion,customSurfaceData.specular);
+
         float3 indirectSpecularTerm = specularLD * specularDFG * specularAO;
         #if defined(_IBL_OFF)
 		    indirectSpecularTerm = half3(0,0,0);
