@@ -55,8 +55,8 @@ void InitializeCustomSurfaceData(Varyings input,out CustomSurfacedata customSurf
     half metallic = SAMPLE_TEXTURE2D(_MetallicMap,sampler_MetallicMap,input.uv).r * _Metallic;
     customSurfaceData.metallic = saturate(metallic);
     half roughness = SAMPLE_TEXTURE2D(_RoughnessMap,sampler_RoughnessMap,input.uv).r * _Roughness;
-    customSurfaceData.roughness = saturate(roughness);
-
+    customSurfaceData.roughness = max(saturate(roughness),0.001f);
+    
     //normalTS (tangent Space)
     float4 normalTS = SAMPLE_TEXTURE2D(_NormalMap,sampler_NormalMap,input.uv);
     customSurfaceData.normalTS =  UnpackNormalScale(normalTS,_Normal);
