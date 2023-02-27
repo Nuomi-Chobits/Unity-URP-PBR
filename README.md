@@ -1,6 +1,6 @@
 # Unity-URP-PBR
 
- PBR Shader for Unity.
+ Custom PBR Shader for Unity.
 
 ## SimpleLit (SimpleLit Scene)
 For more information, please visit -> https://tajourney.games/6065/
