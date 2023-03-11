@@ -3,8 +3,8 @@
  Custom PBR Shader for Unity URP.
  
 # Preview Links
-- SimpleLit(https://github.com/Nuomi-Chobits/Unity-URP-PBR#simplelit-simplelit-scene)
-- StandardLit(https://github.com/Nuomi-Chobits/Unity-URP-PBR#standardlitlit-scene)
+- [SimpleLit](https://github.com/Nuomi-Chobits/Unity-URP-PBR#simplelit-simplelit-scene)
+- [StandardLit](https://github.com/Nuomi-Chobits/Unity-URP-PBR#standardlitlit-scene)
 - Skin (todo)
 
 ## SimpleLit (SimpleLit Scene)
