@@ -5,7 +5,7 @@
 # Preview Links
 - [SimpleLit](https://github.com/Nuomi-Chobits/Unity-URP-PBR#simplelit-simplelit-scene)
 - [StandardLit](https://github.com/Nuomi-Chobits/Unity-URP-PBR#standardlitlit-scene)
-- [Skin]
+- [Skin](https://github.com/Nuomi-Chobits/Unity-URP-PBR/blob/main/README.md#skin)
 
 ## SimpleLit (SimpleLit Scene)
 For more information, please visit -> https://tajourney.games/6065/
