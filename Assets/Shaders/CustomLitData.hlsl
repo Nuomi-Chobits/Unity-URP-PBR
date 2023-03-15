@@ -22,4 +22,10 @@ struct CustomSurfacedata
     half  alpha;
 };
 
+struct CustomClearCoatData
+{
+    half3 clearCoatNormal;
+    half  clearCoat;
+    half  clearCoatRoughness;
+};
 #endif

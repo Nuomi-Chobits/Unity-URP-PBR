@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{2AEF6C46-DC8A-5333-0E43-D3A63B11A936}</ProjectGuid>
+    <ProjectGuid>{153E7399-6F2A-7BEB-AAD5-2E78768D420D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp-Editor</AssemblyName>
@@ -56,7 +56,19 @@
     <Analyzer Include="E:\tools\VS\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs" />
+    <Compile Include="Assets\URPPlus\Scripts\Editor\MaterialEditorExtension.cs" />
+    <Compile Include="Assets\URPPlus\Scripts\Editor\URPPlusStyles.cs" />
+    <Compile Include="Assets\URPPlus\Scripts\Editor\LitGUI.cs" />
+    <Compile Include="Assets\URPPlus\Scripts\Editor\HairGUI.cs" />
+    <Compile Include="Assets\URPPlus\Scripts\Editor\LayeredLitGUI.cs" />
+    <Compile Include="Assets\URPPlus\Scripts\Editor\FabricGUI.cs" />
+    <Compile Include="Assets\URPPlus\Scripts\Editor\SimpleEyeGUI.cs" />
+    <Compile Include="Assets\URPPlus\Scripts\Editor\SetMaterialProperties.cs" />
+    <Compile Include="Assets\URPPlus\Scripts\Editor\EyeGUI.cs" />
+    <Compile Include="Assets\URPPlus\Scripts\Editor\ComplexLitGUI.cs" />
+    <Compile Include="Assets\URPPlus\Scripts\Editor\PropertyStructures.cs" />
+    <Compile Include="Assets\URPPlus\Scripts\Editor\SimpleLitGUI.cs" />
+    <Compile Include="Assets\URPPlus\Scripts\Editor\FunctionsGUI.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -854,7 +866,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp.csproj">
-      <Project>{3DE073E9-ECEF-E2C3-EC52-1E6D26240350}</Project>
+      <Project>{3505FCA0-880A-49F9-51B1-63ECECA81AC0}</Project>
       <Name>Assembly-CSharp</Name>
     </ProjectReference>
   </ItemGroup>
