@@ -27,7 +27,7 @@ https://tajourney.games/6234/
 #### IBL
 SpecularOcclusion Off:
 <div align=center><img src="https://user-images.githubusercontent.com/89976115/221413278-d2c17cf5-e5c1-42a8-b289-8079ec73c555.png" width="30%"></div>
-SpecularOcclusion ON: (GetSpecularOcclusionFromAmbientOcclusio + AOMultiBounce)
+SpecularOcclusion ON: (GetSpecularOcclusionFromAmbientOcclusion + AOMultiBounce)
 <div align=center><img src="https://user-images.githubusercontent.com/89976115/221413285-4e3a2a34-96be-44eb-973b-bc7c2bbce097.png" width="30%"></div>
 
 URP PBR vs Custom PBR
